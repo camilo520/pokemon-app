@@ -1,11 +1,9 @@
+import type { PokemonDetails } from '../types/PokemonsDetails';
 import type { PokemonList } from '../types/PokemonTypes';
 
-export async function GetPokemon(
-  limit = 151,
-  offset = 0,
-): Promise<PokemonList> {
+export async function GetPokemon(limit = 151): Promise<PokemonList> {
   const response = await fetch(
-    `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`,
+    `https://pokeapi.co/api/v2/pokemon?limit=${limit}`,
   );
 
   if (!response.ok) {
@@ -13,4 +11,12 @@ export async function GetPokemon(
   }
 
   return await response.json();
+}
+
+export async function GetAllDetailsPokemon(
+  url: string,
+): Promise<PokemonDetails> {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Error con ${url}`);
+  return await res.json();
 }
