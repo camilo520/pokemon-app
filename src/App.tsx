@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import DataTable, { type TableColumn } from 'react-data-table-component';
-import { GetAllDetailsPokemon, GetPokemon } from './services/api';
+import { GetAllDetailsPokemon, GetPokemon } from './services/pokemonApi';
 import type { PokemonDetails } from './types/PokemonsDetails';
 import { usePokemonData } from './hooks/useDataPokemon';
 import { TableComponent } from './components/TableComponent';
