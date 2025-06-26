@@ -1,6 +1,7 @@
 import DataTable, { type TableColumn } from 'react-data-table-component';
 import type { PokemonDetails } from '../types/PokemonsDetails';
 import { useMemo, useState } from 'react';
+import { getPokemonColumns } from './ColumnsPokemon';
 
 interface Props {
   data: PokemonDetails[];
@@ -16,6 +17,7 @@ export const TableComponent = ({
   getStats,
 }: Props) => {
   const [selectedType, setSelectedType] = useState<string>('Todos');
+  const columns = getPokemonColumns(onSelect, getStats);
 
   const types = useMemo(() => {
     const allTypes = data.flatMap((pokemon) =>
@@ -31,84 +33,8 @@ export const TableComponent = ({
     );
   }, [data, selectedType]);
 
-  const columns: TableColumn<PokemonDetails>[] = [
-    {
-      name: 'Imagen',
-      cell: (row) => (
-        <img
-          src={row.sprites.front_default}
-          alt={row.name}
-          width={50}
-          onClick={() => onSelect(row)}
-        />
-      ),
-      sortable: false,
-    },
-    {
-      name: 'Nombre',
-      selector: (row) => row.name,
-      sortable: true,
-    },
-    {
-      name: 'Tipo(s)',
-      selector: (row) => row.types.map((t) => t.type.name).join(', '),
-      sortable: true,
-    },
-    {
-      name: 'Peso (kg)',
-      selector: (row) => row.weight / 10,
-      sortable: true,
-    },
-    {
-      name: 'Altura (m)',
-      selector: (row) => row.height / 10,
-      sortable: true,
-    },
-    {
-      name: 'Salud base',
-      selector: (row) => getStats(row, 'hp'),
-      sortable: true,
-    },
-    {
-      name: 'Experiencia base',
-      selector: (row) => row.base_experience,
-      sortable: true,
-    },
-    {
-      name: 'Ataque base',
-      selector: (row) => getStats(row, 'attack'),
-      sortable: true,
-    },
-    {
-      name: 'Defensa base',
-      selector: (row) => getStats(row, 'defense'),
-      sortable: true,
-    },
-    {
-      name: 'Ataque especial',
-      selector: (row) => getStats(row, 'special-attack'),
-      sortable: true,
-    },
-    {
-      name: 'Defensa especial',
-      selector: (row) => getStats(row, 'special-defense'),
-      sortable: true,
-    },
-    {
-      name: 'Velocidad',
-      selector: (row) => getStats(row, 'speed'),
-      sortable: true,
-    },
-    {
-      name: 'Ver detalles',
-      cell: (row) => <button onClick={() => onSelect(row)}>Ver</button>,
-      ignoreRowClick: true,
-      button: true,
-    },
-  ];
-
   return (
-    <div>
+    <div className="table">
       <div style={{ marginBottom: '1rem' }}>
         <label htmlFor="typeFilter">Filtrar por tipo:&nbsp;</label>
         <select

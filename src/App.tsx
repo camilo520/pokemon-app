@@ -22,11 +22,15 @@ function App() {
   if (loading) return <p>Cargando Pokemones...</p>;
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>Pokémon (151 primeros)</h2>
-      <button onClick={switchComponent}>
-        {changeComponent ? 'Cambiar a cuadricula' : 'Cambiar a tabla'}
-      </button>
+    <div className="background">
+      <h2>Lista de los primeros 151 Pokémones</h2>
+      <div style={{ paddingBottom: 20 }}>
+        <button onClick={switchComponent}>
+          {changeComponent
+            ? 'Cambiar vista a cuadricula'
+            : 'Cambiar vista a tabla'}
+        </button>
+      </div>
       {changeComponent ? (
         <TableComponent
           data={data}
@@ -35,11 +39,7 @@ function App() {
           onSelect={setSelectedPokemon}
         />
       ) : (
-        <GridComponent
-          data={data}
-          loading={loading}
-          onSelect={setSelectedPokemon}
-        />
+        <GridComponent data={data} onSelect={setSelectedPokemon} />
       )}
 
       <ModalPokemon

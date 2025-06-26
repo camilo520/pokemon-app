@@ -7,7 +7,7 @@ export async function GetPokemon(limit = 151): Promise<PokemonList> {
   );
 
   if (!response.ok) {
-    throw new Error('Error al obtener la lista de Pokémon');
+    throw new Error('Error al obtener la lista de Pokémones');
   }
 
   return await response.json();
