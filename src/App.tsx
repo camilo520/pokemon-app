@@ -1,66 +1,51 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './App.css';
-import DataTable, { type TableColumn } from 'react-data-table-component';
-import { GetAllDetailsPokemon, GetPokemon } from './services/pokemonApi';
-import type { PokemonDetails } from './types/PokemonsDetails';
 import { usePokemonData } from './hooks/useDataPokemon';
 import { TableComponent } from './components/TableComponent';
+import { GridComponent } from './components/GridComponent';
+import { ModalPokemon } from './components/ModalPokemon';
 
 function App() {
   const { data, loading, selectedPokemon, setSelectedPokemon, getStats } =
     usePokemonData();
 
+  const [changeComponent, setChangeComponent] = useState(true);
+
+  const switchComponent = () => {
+    if (changeComponent) {
+      setChangeComponent((changeComponent) => !changeComponent);
+    } else {
+      setChangeComponent((changeComponent) => !changeComponent);
+    }
+  };
+
+  if (loading) return <p>Cargando Pokemones...</p>;
+
   return (
     <div style={{ padding: 20 }}>
       <h2>Pokémon (151 primeros)</h2>
-      <TableComponent
-        data={data}
-        loading={loading}
-        getStats={getStats}
-        onSelect={setSelectedPokemon}
-      />
-
-      <div className="grid-container">
-        {data.map((pokemon) => (
-          <div
-            key={pokemon.id}
-            className="pokemon-card"
-            onClick={() => setSelectedPokemon(pokemon)}
-          >
-            <div className="card-id">#{pokemon.id}</div>
-            <img
-              src={pokemon.sprites.front_default}
-              alt={pokemon.name}
-              className="card-image"
-            />
-            <div className="card-name">{pokemon.name}</div>
-          </div>
-        ))}
-      </div>
-
-      {selectedPokemon && (
-        <div style={{ marginTop: 20, border: '1px solid #ccc', padding: 20 }}>
-          <h3>{selectedPokemon.name.toUpperCase()}</h3>
-          <img
-            src={selectedPokemon.sprites.front_default}
-            alt={selectedPokemon.name}
-          />
-          <p>Altura: {selectedPokemon.height / 10} m</p>
-          <p>Peso: {selectedPokemon.weight / 10} kg</p>
-          <p>
-            Tipos: {selectedPokemon.types.map((t) => t.type.name).join(', ')}
-          </p>
-          <p>Estadísticas:</p>
-          <ul>
-            {selectedPokemon.stats.map((s) => (
-              <li key={s.stat.name}>
-                {s.stat.name}: {s.base_stat}
-              </li>
-            ))}
-          </ul>
-          <button onClick={() => setSelectedPokemon(null)}>Cerrar</button>
-        </div>
+      <button onClick={switchComponent}>
+        {changeComponent ? 'Cambiar a cuadricula' : 'Cambiar a tabla'}
+      </button>
+      {changeComponent ? (
+        <TableComponent
+          data={data}
+          loading={loading}
+          getStats={getStats}
+          onSelect={setSelectedPokemon}
+        />
+      ) : (
+        <GridComponent
+          data={data}
+          loading={loading}
+          onSelect={setSelectedPokemon}
+        />
       )}
+
+      <ModalPokemon
+        selectedPokemon={selectedPokemon}
+        setSelectedPokemon={setSelectedPokemon}
+      />
     </div>
   );
 }

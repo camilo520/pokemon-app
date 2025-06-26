@@ -1,5 +1,6 @@
 import DataTable, { type TableColumn } from 'react-data-table-component';
 import type { PokemonDetails } from '../types/PokemonsDetails';
+import { useMemo, useState } from 'react';
 
 interface Props {
   data: PokemonDetails[];
@@ -14,11 +15,32 @@ export const TableComponent = ({
   onSelect,
   getStats,
 }: Props) => {
+  const [selectedType, setSelectedType] = useState<string>('Todos');
+
+  const types = useMemo(() => {
+    const allTypes = data.flatMap((pokemon) =>
+      pokemon.types.map((t) => t.type.name),
+    );
+    return ['Todos', ...Array.from(new Set(allTypes))];
+  }, [data]);
+
+  const filteredData = useMemo(() => {
+    if (selectedType === 'Todos') return data;
+    return data.filter((pokemon) =>
+      pokemon.types.some((t) => t.type.name === selectedType),
+    );
+  }, [data, selectedType]);
+
   const columns: TableColumn<PokemonDetails>[] = [
     {
       name: 'Imagen',
       cell: (row) => (
-        <img src={row.sprites.front_default} alt={row.name} width={50} />
+        <img
+          src={row.sprites.front_default}
+          alt={row.name}
+          width={50}
+          onClick={() => onSelect(row)}
+        />
       ),
       sortable: false,
     },
@@ -34,12 +56,12 @@ export const TableComponent = ({
     },
     {
       name: 'Peso (kg)',
-      selector: (row) => row.weight,
+      selector: (row) => row.weight / 10,
       sortable: true,
     },
     {
       name: 'Altura (m)',
-      selector: (row) => row.height,
+      selector: (row) => row.height / 10,
       sortable: true,
     },
     {
@@ -86,13 +108,30 @@ export const TableComponent = ({
   ];
 
   return (
-    <DataTable
-      columns={columns}
-      data={data}
-      progressPending={loading}
-      pagination
-      highlightOnHover
-      responsive
-    />
+    <div>
+      <div style={{ marginBottom: '1rem' }}>
+        <label htmlFor="typeFilter">Filtrar por tipo:&nbsp;</label>
+        <select
+          id="typeFilter"
+          value={selectedType}
+          onChange={(e) => setSelectedType(e.target.value)}
+        >
+          {types.map((type) => (
+            <option key={type} value={type}>
+              {type.charAt(0).toUpperCase() + type.slice(1)}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <DataTable
+        columns={columns}
+        data={filteredData}
+        progressPending={loading}
+        pagination
+        highlightOnHover
+        responsive
+      />
+    </div>
   );
 };
