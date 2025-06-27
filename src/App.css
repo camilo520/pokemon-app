@@ -24,6 +24,7 @@ select {
   border-radius: 6px;
   border: 1px solid #ccc;
   background-color: #fff;
+  color: #000000;
   transition: border-color 0.2s ease;
 }
 
