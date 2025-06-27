@@ -20,17 +20,19 @@ export const TableComponent = ({
   const [selectedType, setSelectedType] = useState<string>('Todos');
   const columns = getPokemonColumns(onSelect, getStats);
 
+  //---Generar lista de tipos de Pokémon-----
   const types = useMemo(() => {
     const allTypes = data.flatMap((pokemon) =>
-      pokemon.types.map((t) => t.type.name),
+      pokemon.types.map((p) => p.type.name),
     );
     return ['Todos', ...Array.from(new Set(allTypes))];
   }, [data]);
 
+  //---Filtra los Pokemones por tipo-----
   const filteredData = useMemo(() => {
     if (selectedType === 'Todos') return data;
     return data.filter((pokemon) =>
-      pokemon.types.some((t) => t.type.name === selectedType),
+      pokemon.types.some((p) => p.type.name === selectedType),
     );
   }, [data, selectedType]);
 

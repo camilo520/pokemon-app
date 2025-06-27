@@ -11,7 +11,8 @@ export const ModalPokemon = ({
   selectedPokemon,
   setSelectedPokemon,
 }: Props) => {
-  const statTranslations: Record<string, string> = {
+  //---Traducción de las estadísticas---
+  const translations: Record<string, string> = {
     hp: 'Salud',
     attack: 'Ataque',
     defense: 'Defensa',
@@ -39,12 +40,14 @@ export const ModalPokemon = ({
         />
         <p>Altura: {selectedPokemon.height / 10} m</p>
         <p>Peso: {selectedPokemon.weight / 10} kg</p>
-        <p>Tipos: {selectedPokemon.types.map((t) => t.type.name).join(', ')}</p>
+        <p>
+          Tipo(s): {selectedPokemon.types.map((t) => t.type.name).join(', ')}
+        </p>
         <p>Estadísticas:</p>
         <ul>
           {selectedPokemon.stats.map((s) => (
             <li key={s.stat.name}>
-              {statTranslations[s.stat.name] ?? s.stat.name}:{' '}
+              {translations[s.stat.name] ?? s.stat.name}:{' '}
               <span style={getStatStyle(s.base_stat)}>{s.base_stat} </span>
             </li>
           ))}

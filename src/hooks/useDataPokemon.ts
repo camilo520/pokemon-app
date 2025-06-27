@@ -9,6 +9,7 @@ export const usePokemonData = () => {
     null,
   );
 
+  //---Carga los primeros 151 Pokémones al iniciar el hook---
   useEffect(() => {
     const cargarPokemones = async () => {
       try {
@@ -27,6 +28,7 @@ export const usePokemonData = () => {
     cargarPokemones();
   }, []);
 
+  //---Función para obtener las estadísticas específicas de un Pokémon---
   const getStats = (pokemon: PokemonDetails, statName: string) => {
     return pokemon.stats.find((s) => s.stat.name === statName)?.base_stat ?? 0;
   };
