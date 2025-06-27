@@ -1,6 +1,7 @@
 import type { TableColumn } from 'react-data-table-component';
 import type { PokemonDetails } from '../../types/PokemonsDetails';
 
+//---Define los estilos de las estadísticas dependiendo de su valor---
 export const getStatStyle = (value: number) => {
   if (value >= 100)
     return {
@@ -24,6 +25,7 @@ export const getStatStyle = (value: number) => {
   };
 };
 
+//---Genera las columnas de la tabla---
 export const getPokemonColumns = (
   onSelect: (pokemon: PokemonDetails) => void,
   getStats: (pokemon: PokemonDetails, statName: string) => number,

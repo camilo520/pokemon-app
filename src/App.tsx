@@ -4,13 +4,16 @@ import { usePokemonData } from './hooks/useDataPokemon';
 import { TableComponent } from './components/TablePokemons/TableComponent';
 import { GridComponent } from './components/GridComponent/GridComponent';
 import { ModalPokemon } from './components/ModalPokemon/ModalPokemon';
+import { LoadingComponent } from './components/LoadingComponent';
 
 function App() {
+  //---Hook para obtener los datos de los Pokémones---
   const { data, loading, selectedPokemon, setSelectedPokemon, getStats } =
     usePokemonData();
 
-  const [changeComponent, setChangeComponent] = useState(true);
+  const [changeComponent, setChangeComponent] = useState(false);
 
+  //---Función para cambiar entre la vista de tabla y la vista de cuadricula---
   const switchComponent = () => {
     if (changeComponent) {
       setChangeComponent((changeComponent) => !changeComponent);
@@ -19,7 +22,7 @@ function App() {
     }
   };
 
-  if (loading) return <p>Cargando Pokemones...</p>;
+  if (loading) return <LoadingComponent />;
 
   return (
     <div className="background">

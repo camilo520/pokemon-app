@@ -10,6 +10,7 @@ interface Props {
 export const GridComponent = ({ data, onSelect }: Props) => {
   const [visibleCount, setVisibleCount] = useState(40);
 
+  //---Muestra los primeros 40 Pokémones y va cargando de 40 más---
   const handleLoadMore = () => {
     setVisibleCount((prev) => prev + 40);
   };
@@ -42,7 +43,7 @@ export const GridComponent = ({ data, onSelect }: Props) => {
           }}
         >
           <button className="load-button" onClick={handleLoadMore}>
-            Mostrar más
+            Cargar más
           </button>
         </div>
       )}
