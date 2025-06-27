@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { GetAllDetailsPokemon, GetPokemon } from '../services/api';
+import { GetAllDetailsPokemon, GetPokemon } from '../services/pokemonApi';
 import type { PokemonDetails } from '../types/PokemonsDetails';
 
 export const usePokemonData = () => {
