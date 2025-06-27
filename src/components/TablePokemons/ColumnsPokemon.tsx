@@ -1,7 +1,7 @@
 import type { TableColumn } from 'react-data-table-component';
-import type { PokemonDetails } from '../types/PokemonsDetails';
+import type { PokemonDetails } from '../../types/PokemonsDetails';
 
-const getStatStyle = (value: number) => {
+export const getStatStyle = (value: number) => {
   if (value >= 100)
     return {
       backgroundColor: '#d4edda',

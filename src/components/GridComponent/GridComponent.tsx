@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import type { PokemonDetails } from '../types/PokemonsDetails';
+import type { PokemonDetails } from '../../types/PokemonsDetails';
+import './GridComponent.css';
 
 interface Props {
   data: PokemonDetails[];
@@ -40,7 +41,7 @@ export const GridComponent = ({ data, onSelect }: Props) => {
             marginBottom: '30px',
           }}
         >
-          <button className="load-more-button" onClick={handleLoadMore}>
+          <button className="load-button" onClick={handleLoadMore}>
             Mostrar más
           </button>
         </div>

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import './App.css';
 import { usePokemonData } from './hooks/useDataPokemon';
-import { TableComponent } from './components/TableComponent';
-import { GridComponent } from './components/GridComponent';
-import { ModalPokemon } from './components/ModalPokemon';
+import { TableComponent } from './components/TablePokemons/TableComponent';
+import { GridComponent } from './components/GridComponent/GridComponent';
+import { ModalPokemon } from './components/ModalPokemon/ModalPokemon';
 
 function App() {
   const { data, loading, selectedPokemon, setSelectedPokemon, getStats } =
@@ -23,13 +23,19 @@ function App() {
 
   return (
     <div className="background">
-      <h2>Lista de los primeros 151 Pokémones</h2>
-      <div style={{ paddingBottom: 20 }}>
-        <button onClick={switchComponent}>
-          {changeComponent
-            ? 'Cambiar vista a cuadricula'
-            : 'Cambiar vista a tabla'}
-        </button>
+      <h1>Lista de los primeros 151 Pokémones</h1>
+      <div className="switch-container">
+        <span style={{ fontSize: '1.2rem' }}>
+          {changeComponent ? 'Vista de tabla' : 'Vista de cuadricula'}
+        </span>
+        <label className="switch">
+          <input
+            type="checkbox"
+            checked={changeComponent}
+            onChange={switchComponent}
+          />
+          <span className="slider"></span>
+        </label>
       </div>
       {changeComponent ? (
         <TableComponent

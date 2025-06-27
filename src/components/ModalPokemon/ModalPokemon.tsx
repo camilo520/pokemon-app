@@ -1,4 +1,6 @@
-import type { PokemonDetails } from '../types/PokemonsDetails';
+import type { PokemonDetails } from '../../types/PokemonsDetails';
+import { getStatStyle } from '../TablePokemons/ColumnsPokemon';
+import './ModalPokemon.css';
 
 interface Props {
   selectedPokemon: PokemonDetails | null;
@@ -9,21 +11,27 @@ export const ModalPokemon = ({
   selectedPokemon,
   setSelectedPokemon,
 }: Props) => {
+  const statTranslations: Record<string, string> = {
+    hp: 'Salud',
+    attack: 'Ataque',
+    defense: 'Defensa',
+    'special-attack': 'Ataque Especial',
+    'special-defense': 'Defensa Especial',
+    speed: 'Velocidad',
+  };
+
   if (!selectedPokemon) return null;
 
   return (
     <div className="modal-overlay" onClick={() => setSelectedPokemon(null)}>
-      <div
-        className="modal-content"
-        onClick={(e) => e.stopPropagation()} // Evitar cerrar al hacer click dentro
-      >
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <button
           className="modal-close"
           onClick={() => setSelectedPokemon(null)}
         >
           &times;
         </button>
-        <h3>{selectedPokemon.name.toUpperCase()}</h3>
+        <h2>{selectedPokemon.name.toUpperCase()}</h2>
         <img
           src={selectedPokemon.sprites.front_default}
           alt={selectedPokemon.name}
@@ -36,7 +44,8 @@ export const ModalPokemon = ({
         <ul>
           {selectedPokemon.stats.map((s) => (
             <li key={s.stat.name}>
-              {s.stat.name}: {s.base_stat}
+              {statTranslations[s.stat.name] ?? s.stat.name}:{' '}
+              <span style={getStatStyle(s.base_stat)}>{s.base_stat} </span>
             </li>
           ))}
         </ul>
