@@ -12,6 +12,8 @@ En este proyecto utilice una arquitectura basada en componentes reutilizables us
 
 ## 2. Capturas de pantalla
 
+Carpeta de drive en la que se encuentran las capturas de pantalla: https://drive.google.com/drive/folders/10MOkwq81OBnubnUrtPw1kGM_cWVhQUvd?usp=drive_link
+
 ## 3. Link proyecto desplegado en Verccel
 
 https://pokemon-app-kappa-sandy.vercel.app/
