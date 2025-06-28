@@ -29,7 +29,7 @@ https://pokemon-app-kappa-sandy.vercel.app/
 
 2. Clonar el repositorio
 
-   Puedes clonar el repositorio mediante el comando: git clone https://github.com/camilo520/movies-app.git o pulsando el botón verde de "<> Code". Se te desplegara un menu al que puede escoger si quieres clonar el repositorio usando GitHub Desktop o descargar el archivo .zip.
+   Puedes clonar el repositorio mediante el comando: git clone https://github.com/camilo520/pokemon-app.git o pulsando el botón verde de "<> Code". Se te desplegara un menu al que puede escoger si quieres clonar el repositorio usando GitHub Desktop o descargar el archivo .zip.
 
 3. Cuando tengas el repositorio clonado o descargado, vas a ir al archivo y abriras la terminal del sistema (cmd) e ingresaras el siguiente comando: "npm install". Se te descargaran los archivos necesario para ejecutar la aplicación.
 
