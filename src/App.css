@@ -150,3 +150,14 @@ input:checked + .slider:before {
   padding: 20px;
   box-sizing: border-box;
 }
+
+.search-input {
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+  padding: 0.5em;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #000000;
+  transition: border-color 0.2s ease;
+  width: 200px;
+}
