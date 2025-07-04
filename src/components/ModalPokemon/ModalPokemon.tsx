@@ -1,5 +1,4 @@
 import type { PokemonDetails } from '../../types/PokemonsDetails';
-import { getStatStyle } from '../TablePokemons/ColumnsPokemon';
 import './ModalPokemon.css';
 
 interface Props {
