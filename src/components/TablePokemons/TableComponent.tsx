@@ -1,6 +1,5 @@
 import DataTable from 'react-data-table-component';
 import type { PokemonDetails } from '../../types/PokemonsDetails';
-import { useMemo, useState } from 'react';
 import { getPokemonColumns } from './ColumnsPokemon';
 import './TablePokemon.css';
 
